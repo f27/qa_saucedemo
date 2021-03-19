@@ -28,7 +28,7 @@ public class ShopTests extends TestBase {
     }
 
     @Test
-    void addAndRemoveFromCartOnMainTest(){
+    void addAndRemoveFromCartTest(){
         CartPage cart;
         shoppage = new ShopPage();
         cart = new CartPage();
