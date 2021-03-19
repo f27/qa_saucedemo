@@ -4,6 +4,9 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
+import uitest.swagshop.pages.CartPage;
+import uitest.swagshop.pages.LoginPage;
+import uitest.swagshop.pages.ShopPage;
 
 import static com.codeborne.selenide.Selenide.*;
 import static uitest.TestData.*;

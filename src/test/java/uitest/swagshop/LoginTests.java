@@ -2,6 +2,7 @@ package uitest.swagshop;
 
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
+import uitest.swagshop.pages.LoginPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;

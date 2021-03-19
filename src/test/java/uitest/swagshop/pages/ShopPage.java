@@ -1,4 +1,4 @@
-package uitest.swagshop;
+package uitest.swagshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
