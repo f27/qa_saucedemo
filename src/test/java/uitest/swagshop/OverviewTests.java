@@ -8,7 +8,6 @@ import uitest.TestBase;
 import uitest.swagshop.pages.*;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
 import static uitest.TestData.*;
 
 public class OverviewTests extends TestBase {
