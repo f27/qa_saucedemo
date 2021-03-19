@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ShopTests extends TestBase {
@@ -16,9 +15,7 @@ public class ShopTests extends TestBase {
     static void login(){
         open("/");
 
-        $("[data-test = username]").setValue("standard_user"); //problem_user, performance_glitch_user, locked_out_user
-        $("[data-test = password]").setValue("secret_sauce").pressEnter();
-        $("#react-burger-menu-btn").shouldBe(visible);
+        new LoginPage().login("standard_user", "secret_sauce");
     }
 
     @Test
