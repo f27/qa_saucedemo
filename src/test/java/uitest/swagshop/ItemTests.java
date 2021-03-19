@@ -82,13 +82,11 @@ public class ItemTests extends TestBase {
     @Test
     void addAndRemoveFromCartTest(){
         CartPage cart;
-        itempage = new ItemPage();
-
         cart = new CartPage();
 
-        itempage.addToCart();
-        itempage.assertAddToCart(DEFAULT_ITEM);
+        itempage = new ItemPage();
 
+        itempage.addToCart();
         itempage.goToCart();
 
         cart.cartShouldHave(DEFAULT_ITEM);
@@ -97,8 +95,6 @@ public class ItemTests extends TestBase {
         new ShopPage().goToItem(DEFAULT_ITEM);
 
         itempage.removeFromCart();
-        itempage.assertRemoveFromCart(DEFAULT_ITEM);
-
         itempage.goToCart();
 
         cart.cartShouldNotHave(DEFAULT_ITEM);

@@ -29,11 +29,11 @@ public class ShopTests extends TestBase {
     @Test
     void addAndRemoveFromCartTest(){
         CartPage cart;
-        shoppage = new ShopPage();
         cart = new CartPage();
 
+        shoppage = new ShopPage();
+
         shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.assertAddToCart(DEFAULT_ITEM);
 
         shoppage.goToCart();
 
@@ -41,7 +41,6 @@ public class ShopTests extends TestBase {
         cart.continueShopping();
 
         shoppage.removeFromCart(DEFAULT_ITEM);
-        shoppage.assertRemoveFromCart(DEFAULT_ITEM);
 
         shoppage.goToCart();
 

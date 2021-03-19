@@ -25,18 +25,12 @@ public class ShopPage extends StaticElements {
 
     public void addToCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_primary.btn_inventory").click();
-    }
-
-    public void removeFromCart(String item) {
-        itemNames.findBy(text(item)).parent().parent().parent().$(".btn_secondary.btn_inventory").click();
-    }
-
-    public void assertAddToCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("REMOVE"));
         cartBadge.shouldBe(visible);
     }
 
-    public void assertRemoveFromCart(String item) {
+    public void removeFromCart(String item) {
+        itemNames.findBy(text(item)).parent().parent().parent().$(".btn_secondary.btn_inventory").click();
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("ADD TO CART"));
         cartBadge.shouldNotBe(visible);
     }

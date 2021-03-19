@@ -5,8 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class CartPage extends StaticElements {
 
@@ -21,8 +20,11 @@ public class CartPage extends StaticElements {
     final private ElementsCollection cartItems = $$(".cart_item");
 
     public void clear() {
+        cartLink.click();
         cartItems.forEach(item -> item.$(".btn_secondary").click());
 
+        cartItems.first().shouldNotBe(visible);
+        cartBadge.shouldNotBe(visible);
     }
 
     public void cartShouldHave(String item) {

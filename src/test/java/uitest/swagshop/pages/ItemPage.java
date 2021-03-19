@@ -45,19 +45,15 @@ public class ItemPage extends StaticElements {
     }
 
     public void addToCart(){
+        addAndRemoveButton.shouldHave(text("ADD TO CART"));
         addAndRemoveButton.click();
-    }
-
-    public void removeFromCart(){
-        addAndRemoveButton.click();
-    }
-
-    public void assertAddToCart(String item) {
         addAndRemoveButton.shouldHave(text("REMOVE"));
         cartBadge.shouldBe(visible);
     }
 
-    public void assertRemoveFromCart(String item) {
+    public void removeFromCart(){
+        addAndRemoveButton.shouldHave(text("REMOVE"));
+        addAndRemoveButton.click();
         addAndRemoveButton.shouldHave(text("ADD TO CART"));
         cartBadge.shouldNotBe(visible);
     }
