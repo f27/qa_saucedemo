@@ -21,50 +21,50 @@ public class ShopTests extends TestBase {
     @Test
     void addToCartByNameTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
-        shoppage.addToCartFromMain("Sauce Labs Fleece Jacket");
-        shoppage.assertAddToCartFromMain("Sauce Labs Fleece Jacket");
+        shoppage.addToCartFromMain(DEFAULT_ITEM);
+        shoppage.assertAddToCartFromMain(DEFAULT_ITEM);
     }
 
     @Test
     void pictureTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
-        shoppage.checkPicture("Sauce Labs Fleece Jacket", Configuration.baseUrl + "/static/media/sauce-pullover-1200x1500.439fc934.jpg");
+        shoppage.checkPicture(DEFAULT_ITEM, Configuration.baseUrl + DEFAULT_ITEM_PICTURE);
     }
 
     @Test
     void priceTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
-        shoppage.checkPrice("Sauce Labs Fleece Jacket", "49.99");
+        shoppage.checkPrice(DEFAULT_ITEM, DEFAULT_ITEM_PRICE);
     }
 
     @Test
     void sortAtoZTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortAtoZ();
-        shoppage.assertSortAtoZ();
+        shoppage.assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
     void sortZtoATest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortZtoA();
-        shoppage.assertSortZtoA();
+        shoppage.assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
     void sortLowToHighTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortLowToHigh();
         shoppage.assertSortLowToHigh();
@@ -73,7 +73,7 @@ public class ShopTests extends TestBase {
     @Test
     void sortHighToLowTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortHighToLow();
         shoppage.assertSortHighToLow();
@@ -82,7 +82,7 @@ public class ShopTests extends TestBase {
     @Test
     void socialButtonsTest(){
         shoppage = new ShopPage();
-        open("/inventory.html");
+        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.checkSocialButtons();
     }

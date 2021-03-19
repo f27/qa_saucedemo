@@ -48,20 +48,20 @@ public class ShopPage extends TestBase {
         sorting.selectOption("Name (A to Z)");
     }
 
-    public void assertSortAtoZ() {
+    public void assertSortAtoZ(String aItem, String zItem) {
         sorting.getSelectedOption().shouldHave(text("Name (A to Z)"));
-        itemNames.first().shouldHave(text("Sauce Labs Backpack"));
-        itemNames.last().shouldHave(text("Test.allTheThings() T-Shirt (Red)"));
+        itemNames.first().shouldHave(text(aItem));
+        itemNames.last().shouldHave(text(zItem));
     }
 
     public void sortZtoA() {
         sorting.selectOption("Name (Z to A)");
     }
 
-    public void assertSortZtoA() {
+    public void assertSortZtoA(String aItem, String zItem) {
         sorting.getSelectedOption().shouldHave(text("Name (Z to A)"));
-        itemNames.last().shouldHave(text("Sauce Labs Backpack"));
-        itemNames.first().shouldHave(text("Test.allTheThings() T-Shirt (Red)"));
+        itemNames.last().shouldHave(text(aItem));
+        itemNames.first().shouldHave(text(zItem));
     }
 
     public void sortLowToHigh() {
