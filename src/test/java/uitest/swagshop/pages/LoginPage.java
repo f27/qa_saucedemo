@@ -10,8 +10,7 @@ public class LoginPage {
 
     final private SelenideElement usernameField = $("[data-test = username]"),
                             passwordField = $("[data-test = password]"),
-                            error = $("[data-test = error]"),
-                            menuButton = $("#react-burger-menu-btn");
+                            error = $("[data-test = error]");
 
     final String wrongUsernameOrPasswordMess = "Epic sadface: Username and password do not match any user in this service",
                 lockedOutMess = "Epic sadface: Sorry, this user has been locked out.";
@@ -30,12 +29,11 @@ public class LoginPage {
     }
 
     public void assertLogin(){
-        menuButton.shouldBe(visible);
+        new ShopPage().hasMenu();
     }
 
     public void logout(){
-        clearBrowserCookies();
-        clearBrowserLocalStorage();
+        new ShopPage().menuClickByText("Logout");
     }
 
     private void assertError(String errorMessage){

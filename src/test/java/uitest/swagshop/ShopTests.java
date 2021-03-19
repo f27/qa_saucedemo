@@ -2,6 +2,7 @@ package uitest.swagshop;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 import uitest.swagshop.pages.CartPage;
@@ -21,23 +22,27 @@ public class ShopTests extends TestBase {
         new LoginPage().login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
+    @BeforeEach
+    void goToMain(){
+        open(DEFAULT_INVENTORY_PAGE);
+    }
+
     @Test
     void addAndRemoveFromCartOnMainTest(){
         CartPage cart;
         shoppage = new ShopPage();
         cart = new CartPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
-        shoppage.addToCartOnMainClick(DEFAULT_ITEM);
-        shoppage.assertAddToCartOnMain(DEFAULT_ITEM);
+        shoppage.addToCart(DEFAULT_ITEM);
+        shoppage.assertAddToCart(DEFAULT_ITEM);
 
         shoppage.goToCart();
 
         cart.cartShouldHave(DEFAULT_ITEM);
         cart.continueShopping();
 
-        shoppage.removeFromCartOnMainClick(DEFAULT_ITEM);
-        shoppage.assertRemoveFromCartOnMain(DEFAULT_ITEM);
+        shoppage.removeFromCart(DEFAULT_ITEM);
+        shoppage.assertRemoveFromCart(DEFAULT_ITEM);
 
         shoppage.goToCart();
 
@@ -48,15 +53,20 @@ public class ShopTests extends TestBase {
     @Test
     void pictureTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
-        shoppage.checkPicture(DEFAULT_ITEM, Configuration.baseUrl + DEFAULT_ITEM_PICTURE);
+        shoppage.checkPicture(DEFAULT_ITEM, DEFAULT_ITEM_PICTURE);
+    }
+
+    @Test
+    void labelTest(){
+        shoppage = new ShopPage();
+
+        shoppage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
     void pictureAltTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.checkAltForPicture(DEFAULT_ITEM);
     }
@@ -64,7 +74,6 @@ public class ShopTests extends TestBase {
     @Test
     void priceTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.checkPrice(DEFAULT_ITEM, DEFAULT_ITEM_PRICE);
     }
@@ -72,7 +81,6 @@ public class ShopTests extends TestBase {
     @Test
     void sortAtoZTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortAtoZ();
         shoppage.assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
@@ -81,7 +89,6 @@ public class ShopTests extends TestBase {
     @Test
     void sortZtoATest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortZtoA();
         shoppage.assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
@@ -90,7 +97,6 @@ public class ShopTests extends TestBase {
     @Test
     void sortLowToHighTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortLowToHigh();
         shoppage.assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
@@ -99,7 +105,6 @@ public class ShopTests extends TestBase {
     @Test
     void sortHighToLowTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortHighToLow();
         shoppage.assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
@@ -108,7 +113,6 @@ public class ShopTests extends TestBase {
     @Test
     void socialButtonsTest(){
         shoppage = new ShopPage();
-        open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.checkSocialButtons();
     }

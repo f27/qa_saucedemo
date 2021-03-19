@@ -2,20 +2,14 @@ package uitest.swagshop.pages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import uitest.TestBase;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class ShopPage extends TestBase {
+public class ShopPage extends HeaderPage {
 
     final private SelenideElement sorting = $(".product_sort_container"),
-            twitterIcon = $(".social_twitter"),
-            fbIcon = $(".social_facebook"),
-            linkedIcon = $(".social_linkedin"),
-            cartBadge = $(".shopping_cart_badge"),
-            cartLink = $(".shopping_cart_link"),
             priceInInventory = $(".inventory_details_price");
 
     final private ElementsCollection itemNames = $$(".inventory_item_name");
@@ -24,24 +18,20 @@ public class ShopPage extends TestBase {
         itemNames.findBy(text(item)).click();
     }
 
-    public void goToCart() {
-        cartLink.click();
-    }
-
-    public void addToCartOnMainClick(String item) {
+    public void addToCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_primary.btn_inventory").click();
     }
 
-    public void removeFromCartOnMainClick(String item) {
+    public void removeFromCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_secondary.btn_inventory").click();
     }
 
-    public void assertAddToCartOnMain(String item) {
+    public void assertAddToCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("REMOVE"));
         cartBadge.shouldBe(visible);
     }
 
-    public void assertRemoveFromCartOnMain(String item) {
+    public void assertRemoveFromCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("ADD TO CART"));
         cartBadge.shouldNotBe(visible);
     }

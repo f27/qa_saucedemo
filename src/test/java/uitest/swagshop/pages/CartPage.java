@@ -1,13 +1,12 @@
 package uitest.swagshop.pages;
 
 import com.codeborne.selenide.SelenideElement;
-import uitest.TestBase;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class CartPage extends TestBase {
+public class CartPage extends HeaderPage {
 
     final private SelenideElement cartList = $(".cart_list"),
             backButton = $(byText("Continue Shopping"));
