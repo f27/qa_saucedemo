@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class ShopPage extends HeaderPage {
+public class ShopPage extends StaticElements {
 
     final private SelenideElement sorting = $(".product_sort_container"),
             pageLabel = $(".product_label"),

@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class CartPage extends HeaderPage {
+public class CartPage extends StaticElements {
 
     final private SelenideElement cartList = $(".cart_list"),
             backButton = $(byText("Continue Shopping")),

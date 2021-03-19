@@ -35,7 +35,7 @@ public class CartTests extends TestBase {
     }
 
     @Test
-    void itemNameTest(){
+    void checkSubHeaderTest(){
         cartpage = new CartPage();
 
         cartpage.checkSubHeader(DEFAULT_CART_LABEL);

@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class HeaderPage {
+public class StaticElements {
 
     final SelenideElement menuButton = $("#react-burger-menu-btn"),
             twitterIcon = $(".social_twitter"),

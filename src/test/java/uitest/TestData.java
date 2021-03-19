@@ -18,10 +18,14 @@ public class TestData {
             DEFAULT_EXPENSIVE_ITEM = "Sauce Labs Fleece Jacket",
             DEFAULT_INVENTORY_PAGE = "/inventory.html",
             DEFAULT_CART_PAGE = "/cart.html",
+            DEFAULT_CHECKOUT_PAGE = "/checkout-step-one.html",
             DEFAULT_HEADER = "Swag Labs",
             DEFAULT_SHOP_LABEL = "Products",
             DEFAULT_CART_LABEL = "Your Cart",
             DEFAULT_CHECKOUT_LABEL = "Checkout: Your Information",
             DEFAULT_CHECKOUT_OVERVIEW_LABEL = "Checkout: Overview",
-            DEFAULT_THANKS_LABEL = "Finish";
+            DEFAULT_THANKS_LABEL = "Finish",
+            DEFAULT_FIRSTNAME = "Alex",
+            DEFAULT_LASTNAME = "Petrov",
+            DEFAULT_ZIP = "12321";
 }

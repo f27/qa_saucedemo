@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ItemPage extends HeaderPage {
+public class ItemPage extends StaticElements {
 
     final static SelenideElement itemName = $(".inventory_details_name"),
             itemDesc = $(".inventory_details_desc"),
