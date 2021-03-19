@@ -36,6 +36,7 @@ public class ShopPage extends TestBase {
 
     public void checkPicture(String item, String picUrl) {
         itemNames.findBy(text(item)).parent().parent().parent().find("img").shouldHave(attribute("src", picUrl));
+        itemNames.findBy(text(item)).parent().parent().parent().find("img").shouldHave(attribute("alt", item));
     }
 
     public void checkPrice(String item, String price) {
