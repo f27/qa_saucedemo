@@ -10,7 +10,6 @@ import static uitest.TestData.*;
 
 public class ShopTests extends TestBase {
     ShopPage shoppage;
-    CartPage cart;
 
     @BeforeAll
     static void login(){
@@ -20,7 +19,8 @@ public class ShopTests extends TestBase {
     }
 
     @Test
-    void addAndRemoveFromCartOnMainByNameTest(){
+    void addAndRemoveFromCartOnMainTest(){
+        CartPage cart;
         shoppage = new ShopPage();
         cart = new CartPage();
         open(DEFAULT_INVENTORY_PAGE);
