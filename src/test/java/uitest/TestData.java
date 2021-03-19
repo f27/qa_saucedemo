@@ -10,7 +10,7 @@ public class TestData {
             DEFAULT_A_ITEM = "Sauce Labs Backpack",
             DEFAULT_Z_ITEM = "Test.allTheThings() T-Shirt (Red)",
             DEFAULT_ITEM = "Sauce Labs Backpack",
-            DEFAULT_ITEM_PRICE = "$29.99",
+            DEFAULT_ITEM_PRICE = "29.99",
             DEFAULT_ITEM_PICTURE = Configuration.baseUrl + "/static/media/sauce-backpack-1200x1500.34e7aa42.jpg",
             DEFAULT_ITEM_DESCRIPTION = "carry.allTheThings() with the sleek, streamlined Sly" +
                     " Pack that melds uncompromising style with unequaled laptop and tablet protection.",

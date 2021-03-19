@@ -10,9 +10,14 @@ import static com.codeborne.selenide.Selenide.$$;
 public class ShopPage extends HeaderPage {
 
     final private SelenideElement sorting = $(".product_sort_container"),
+            pageLabel = $(".product_label"),
             priceInInventory = $(".inventory_details_price");
 
     final private ElementsCollection itemNames = $$(".inventory_item_name");
+
+    public void checkPageLabel(String label) {
+        pageLabel.shouldHave(text(label));
+    }
 
     public void goToItem(String item) {
         itemNames.findBy(text(item)).click();
@@ -88,11 +93,5 @@ public class ShopPage extends HeaderPage {
         sorting.getSelectedOption().shouldHave(text("Price (high to low)"));
         itemNames.last().shouldHave(text(cheapItem));
         itemNames.first().shouldHave(text(expensiveItem));
-    }
-
-    public void checkSocialButtons() {
-        twitterIcon.shouldBe(visible);
-        fbIcon.shouldBe(visible);
-        linkedIcon.shouldBe(visible);
     }
 }
