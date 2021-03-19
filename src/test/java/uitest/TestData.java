@@ -21,6 +21,7 @@ public class TestData {
             DEFAULT_INVENTORY_PAGE = "/inventory.html",
             DEFAULT_CART_PAGE = "/cart.html",
             DEFAULT_CHECKOUT_PAGE = "/checkout-step-one.html",
+            DEFAULT_THANKS_PAGE = "/checkout-complete.html",
             DEFAULT_HEADER = "Swag Labs",
             DEFAULT_SHOP_LABEL = "Products",
             DEFAULT_CART_LABEL = "Your Cart",
