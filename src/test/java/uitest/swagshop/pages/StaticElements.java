@@ -30,7 +30,6 @@ public class StaticElements {
     public void menuClickByText(String text) {
         menuButton.click();
         menuList.findBy(text(text)).click();
-        menuButton.shouldNotBe(visible);
     }
 
     public void goToCart() {
