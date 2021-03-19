@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 
 import static com.codeborne.selenide.Selenide.open;
+import static uitest.TestData.*;
 
 public class LoginTests extends TestBase {
     LoginPage loginpage;
@@ -12,7 +13,7 @@ public class LoginTests extends TestBase {
     public void successLoginTest(){
         loginpage = open("/", LoginPage.class);
 
-        loginpage.login("standard_user", "secret_sauce");
+        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
         loginpage.assertLogin();
         loginpage.logout();
     }
@@ -21,15 +22,23 @@ public class LoginTests extends TestBase {
     public void lockedOutLoginTest(){
         loginpage = open("/", LoginPage.class);
 
-        loginpage.login("locked_out_user", "secret_sauce");
-        loginpage.assertError("Epic sadface: Sorry, this user has been locked out.");
+        loginpage.login(LOCKED_OUT_LOGIN, DEFAULT_PASSWORD);
+        loginpage.isLockedOut();
     }
 
     @Test
     public void wrongLoginTest(){
         loginpage = open("/", LoginPage.class);
 
-        loginpage.login("user", "secret_sauce");
-        loginpage.assertError("Epic sadface: Username and password do not match any user in this service");
+        loginpage.login("wrongUser", DEFAULT_PASSWORD);
+        loginpage.isWrongUsernameOrPassword();
+    }
+
+    @Test
+    public void wrongPasswordTest(){
+        loginpage = open("/", LoginPage.class);
+
+        loginpage.login(DEFAULT_LOGIN, "wrongPass");
+        loginpage.isWrongUsernameOrPassword();
     }
 }

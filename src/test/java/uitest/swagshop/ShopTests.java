@@ -1,12 +1,12 @@
 package uitest.swagshop;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 
 import static com.codeborne.selenide.Selenide.*;
+import static uitest.TestData.*;
 
 public class ShopTests extends TestBase {
     ShopPage shoppage;
@@ -15,7 +15,7 @@ public class ShopTests extends TestBase {
     static void login(){
         open("/");
 
-        new LoginPage().login("standard_user", "secret_sauce");
+        new LoginPage().login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
     @Test

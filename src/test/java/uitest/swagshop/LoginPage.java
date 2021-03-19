@@ -13,13 +13,20 @@ public class LoginPage {
                             error = $("[data-test = error]"),
                             menuButton = $("#react-burger-menu-btn");
 
+    final String wrongUsernameOrPasswordMess = "Epic sadface: Username and password do not match any user in this service",
+                lockedOutMess = "Epic sadface: Sorry, this user has been locked out.";
+
     public void login(String username, String password){
         usernameField.setValue(username);
         passwordField.setValue(password).pressEnter();
     }
 
-    public void assertError(String errorMessage){
-        error.shouldHave(text(errorMessage));
+    public void isLockedOut(){
+        assertError(lockedOutMess);
+    }
+
+    public void isWrongUsernameOrPassword(){
+        assertError(wrongUsernameOrPasswordMess);
     }
 
     public void assertLogin(){
@@ -29,5 +36,9 @@ public class LoginPage {
     public void logout(){
         clearBrowserCookies();
         clearBrowserLocalStorage();
+    }
+
+    private void assertError(String errorMessage){
+        error.shouldHave(text(errorMessage));
     }
 }
