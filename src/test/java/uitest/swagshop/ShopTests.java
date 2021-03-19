@@ -36,6 +36,14 @@ public class ShopTests extends TestBase {
     }
 
     @Test
+    void pictureAltTest(){
+        shoppage = new ShopPage();
+        open(DEFAULT_INVENTORY_PAGE);
+
+        shoppage.checkAltForPicture(DEFAULT_ITEM);
+    }
+
+    @Test
     void priceTest(){
         shoppage = new ShopPage();
         open(DEFAULT_INVENTORY_PAGE);
@@ -67,7 +75,7 @@ public class ShopTests extends TestBase {
         open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortLowToHigh();
-        shoppage.assertSortLowToHigh();
+        shoppage.assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
@@ -76,7 +84,7 @@ public class ShopTests extends TestBase {
         open(DEFAULT_INVENTORY_PAGE);
 
         shoppage.sortHighToLow();
-        shoppage.assertSortHighToLow();
+        shoppage.assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test

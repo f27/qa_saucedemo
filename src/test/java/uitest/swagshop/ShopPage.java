@@ -36,6 +36,9 @@ public class ShopPage extends TestBase {
 
     public void checkPicture(String item, String picUrl) {
         itemNames.findBy(text(item)).parent().parent().parent().find("img").shouldHave(attribute("src", picUrl));
+    }
+
+    public void checkAltForPicture(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().find("img").shouldHave(attribute("alt", item));
     }
 
@@ -69,18 +72,20 @@ public class ShopPage extends TestBase {
         sorting.selectOption("Price (low to high)");
     }
 
-    public void assertSortLowToHigh() {
+    public void assertSortLowToHigh(String cheapItem, String expensiveItem) {
         sorting.getSelectedOption().shouldHave(text("Price (low to high)"));
-        Asserts.check(Float.parseFloat(prices.first().getText().substring(1)) < Float.parseFloat(prices.last().getText().substring(1)), "");
+        itemNames.first().shouldHave(text(cheapItem));
+        itemNames.last().shouldHave(text(expensiveItem));
     }
 
     public void sortHighToLow() {
         sorting.selectOption("Price (high to low)");
     }
 
-    public void assertSortHighToLow() {
+    public void assertSortHighToLow(String cheapItem, String expensiveItem) {
         sorting.getSelectedOption().shouldHave(text("Price (high to low)"));
-        Asserts.check(Float.parseFloat(prices.first().getText().substring(1)) > Float.parseFloat(prices.last().getText().substring(1)), "");
+        itemNames.last().shouldHave(text(cheapItem));
+        itemNames.first().shouldHave(text(expensiveItem));
     }
 
     public void checkSocialButtons() {
