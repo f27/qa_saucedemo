@@ -2,7 +2,6 @@ package uitest.swagshop;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.apache.hc.core5.util.Asserts;
 import uitest.TestBase;
 
 import static com.codeborne.selenide.Condition.*;
@@ -16,22 +15,35 @@ public class ShopPage extends TestBase {
             fbIcon = $(".social_facebook"),
             linkedIcon = $(".social_linkedin"),
             cartBadge = $(".shopping_cart_badge"),
-            cartList = $(".cart_list"),
+            cartLink = $(".shopping_cart_link"),
             priceInInventory = $(".inventory_details_price");
 
-    final private ElementsCollection itemNames = $$(".inventory_item_name"),
-            prices = $$(".inventory_item_price");
+    final private ElementsCollection itemNames = $$(".inventory_item_name");
 
+    public void goToItem(String item) {
+        itemNames.findBy(text(item)).click();
+    }
 
-    public void addToCartFromMain(String item) {
+    public void goToCart() {
+        cartLink.click();
+    }
+
+    public void addToCartOnMainClick(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_primary.btn_inventory").click();
     }
 
-    public void assertAddToCartFromMain(String item) {
-        cartBadge.shouldBe(visible);
-        cartBadge.click();
-        cartList.shouldHave(text(item));
+    public void removeFromCartOnMainClick(String item) {
+        itemNames.findBy(text(item)).parent().parent().parent().$(".btn_secondary.btn_inventory").click();
+    }
 
+    public void assertAddToCartOnMain(String item) {
+        itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("REMOVE"));
+        cartBadge.shouldBe(visible);
+    }
+
+    public void assertRemoveFromCartOnMain(String item) {
+        itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("ADD TO CART"));
+        cartBadge.shouldNotBe(visible);
     }
 
     public void checkPicture(String item, String picUrl) {

@@ -10,6 +10,7 @@ import static uitest.TestData.*;
 
 public class ShopTests extends TestBase {
     ShopPage shoppage;
+    CartPage cart;
 
     @BeforeAll
     static void login(){
@@ -19,12 +20,26 @@ public class ShopTests extends TestBase {
     }
 
     @Test
-    void addToCartByNameTest(){
+    void addAndRemoveFromCartOnMainByNameTest(){
         shoppage = new ShopPage();
+        cart = new CartPage();
         open(DEFAULT_INVENTORY_PAGE);
 
-        shoppage.addToCartFromMain(DEFAULT_ITEM);
-        shoppage.assertAddToCartFromMain(DEFAULT_ITEM);
+        shoppage.addToCartOnMainClick(DEFAULT_ITEM);
+        shoppage.assertAddToCartOnMain(DEFAULT_ITEM);
+
+        shoppage.goToCart();
+
+        cart.cartShouldHave(DEFAULT_ITEM);
+        cart.continueShopping();
+
+        shoppage.removeFromCartOnMainClick(DEFAULT_ITEM);
+        shoppage.assertRemoveFromCartOnMain(DEFAULT_ITEM);
+
+        shoppage.goToCart();
+
+        cart.cartShouldNotHave(DEFAULT_ITEM);
+        cart.continueShopping();
     }
 
     @Test
