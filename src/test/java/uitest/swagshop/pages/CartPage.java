@@ -1,8 +1,10 @@
 package uitest.swagshop.pages;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -23,7 +25,7 @@ public class CartPage extends StaticElements {
         cartLink.click();
         cartItems.forEach(item -> item.$(".btn_secondary").click());
 
-        cartItems.first().shouldNotBe(visible);
+        cartItems.shouldHave(sizeLessThan(1));
         cartBadge.shouldNotBe(visible);
     }
 
