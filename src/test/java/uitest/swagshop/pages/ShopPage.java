@@ -4,8 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ShopPage extends StaticElements {
 
@@ -19,8 +18,10 @@ public class ShopPage extends StaticElements {
         pageLabel.shouldHave(text(label));
     }
 
-    public void goToItem(String item) {
+    public ItemPage goToItem(String item) {
         itemNames.findBy(text(item)).click();
+
+        return page(ItemPage.class);
     }
 
     public void addToCart(String item) {

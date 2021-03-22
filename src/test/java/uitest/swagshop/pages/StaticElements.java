@@ -3,9 +3,9 @@ package uitest.swagshop.pages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 
 public class StaticElements {
 
@@ -19,7 +19,7 @@ public class StaticElements {
 
     final ElementsCollection menuList = $$("a.menu-item");
 
-    public void checkSubHeader(String label){
+    public void checkSubHeader(String label) {
         subHeader.shouldHave(text(label));
     }
 
@@ -32,8 +32,15 @@ public class StaticElements {
         menuList.findBy(text(text)).click();
     }
 
-    public void goToCart() {
+    public ShopPage goToShop() {
+        menuClickByText("All Items");
+
+        return page(ShopPage.class);
+    }
+
+    public CartPage goToCart() {
         cartLink.click();
+        return page(CartPage.class);
     }
 
     public void checkSocialButtons() {

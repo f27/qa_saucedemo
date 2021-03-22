@@ -14,166 +14,130 @@ import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
 
 public class CartTests extends TestBase {
-    CartPage cartpage;
+    CartPage cartPage;
+    ShopPage shopPage;
+    CheckOutPage checkOutPage;
+
 
     @BeforeAll
-    static void login(){
-        open("/");
-
-        new LoginPage().login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
+    static void login() {
+        LoginPage loginpage = open("/", LoginPage.class);
+        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
     @BeforeEach
-    void goToCart(){
-        open(DEFAULT_CART_PAGE);
+    void goToCart() {
+        cartPage = open(DEFAULT_CART_PAGE, CartPage.class);
     }
 
     @AfterEach
-    void cleanCart(){
-        cartpage = new CartPage();
-        cartpage.clear();
+    void cleanCart() {
+        cartPage.clear();
     }
 
     @Test
-    void checkSubHeaderTest(){
-        cartpage = new CartPage();
-
-        cartpage.checkSubHeader(DEFAULT_CART_LABEL);
+    void checkSubHeaderTest() {
+        cartPage.checkSubHeader(DEFAULT_CART_LABEL);
     }
 
     @Test
-    void socialButtonsTest(){
-        cartpage = new CartPage();
-
-        cartpage.checkSocialButtons();
+    void socialButtonsTest() {
+        cartPage.checkSocialButtons();
     }
 
     @Test
-    void isEmptyTest(){
-        cartpage = new CartPage();
-
-        cartpage.isEmpty();
+    void isEmptyTest() {
+        cartPage.isEmpty();
     }
 
     @Test
-    void continueShoppingTest(){
-        cartpage = new CartPage();
-
-        cartpage.continueShopping();
-        new ShopPage().checkPageLabel(DEFAULT_SHOP_LABEL);
+    void continueShoppingTest() {
+        shopPage = cartPage.continueShopping();
+        shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
-    void checkOutTest(){
-        cartpage = new CartPage();
-
-        cartpage.checkOut();
-        new CheckOutPage().checkSubHeader(DEFAULT_CHECKOUT_LABEL);
+    void checkOutTest() {
+        checkOutPage = cartPage.checkOut();
+        checkOutPage.checkSubHeader(DEFAULT_CHECKOUT_LABEL);
     }
 
     @Test
-    void itemInCartTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
+    void itemInCartTest() {
+        shopPage = cartPage.continueShopping();
 
-        cartpage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM);
+        shopPage.addToCart(DEFAULT_CHEAP_ITEM);
+        cartPage = shopPage.goToCart();
 
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.addToCart(DEFAULT_CHEAP_ITEM);
-        shoppage.goToCart();
+        cartPage.itemInCart(DEFAULT_ITEM);
+        cartPage.itemInCart(DEFAULT_CHEAP_ITEM);
 
-        cartpage.itemInCart(DEFAULT_ITEM);
-        cartpage.itemInCart(DEFAULT_CHEAP_ITEM);
-
-        cartpage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
-        cartpage.checkPrice(DEFAULT_ITEM_PRICE);
-        cartpage.checkQuantity("1");
-    }
-    @Test
-    void checkItemNameTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
-
-        cartpage.continueShopping();
-
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.goToCart();
-
-        cartpage.checkName(DEFAULT_ITEM);
+        cartPage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
+        cartPage.checkPrice(DEFAULT_ITEM_PRICE);
+        cartPage.checkQuantity("1");
     }
 
     @Test
-    void checkItemDescTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
+    void checkItemNameTest() {
+        shopPage = cartPage.continueShopping();
 
-        cartpage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
 
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.goToCart();
-
-        cartpage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
+        cartPage.checkName(DEFAULT_ITEM);
     }
 
     @Test
-    void checkItemPriceTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
+    void checkItemDescTest() {
+        shopPage = cartPage.continueShopping();
 
-        cartpage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
 
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.goToCart();
-
-        cartpage.checkPrice(DEFAULT_ITEM_PRICE);
+        cartPage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
     }
 
     @Test
-    void checkItemQuantityTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
+    void checkItemPriceTest() {
+        shopPage = cartPage.continueShopping();
 
-        cartpage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
 
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.goToCart();
-
-        cartpage.checkQuantity("1");
+        cartPage.checkPrice(DEFAULT_ITEM_PRICE);
     }
 
     @Test
-    void removeItemTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
+    void checkItemQuantityTest() {
+        shopPage = cartPage.continueShopping();
 
-        cartpage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
 
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.goToCart();
-
-        cartpage.itemInCart(DEFAULT_ITEM);
-        cartpage.clear();
+        cartPage.checkQuantity("1");
     }
 
     @Test
-    void checkOutItemTest(){
-        cartpage = new CartPage();
-        ShopPage shoppage;
+    void removeItemTest() {
+        shopPage = cartPage.continueShopping();
 
-        cartpage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
 
-        shoppage = new ShopPage();
-        shoppage.addToCart(DEFAULT_ITEM);
-        shoppage.goToCart();
+        cartPage.itemInCart(DEFAULT_ITEM);
+        cartPage.clear();
+    }
 
-        cartpage.checkOut();
+    @Test
+    void checkOutItemTest() {
+        shopPage = cartPage.continueShopping();
 
-        new CheckOutPage().checkSubHeader(DEFAULT_CHECKOUT_LABEL);
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
+
+        checkOutPage = cartPage.checkOut();
+
+        checkOutPage.checkSubHeader(DEFAULT_CHECKOUT_LABEL);
     }
 }

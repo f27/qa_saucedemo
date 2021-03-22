@@ -5,8 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
-public class OverviewPage extends StaticElements{
+public class OverviewPage extends StaticElements {
     final private SelenideElement itemName = $(".inventory_item_name"),
             itemDesc = $(".inventory_item_desc"),
             itemPrice = $(".inventory_item_price"),
@@ -17,15 +18,17 @@ public class OverviewPage extends StaticElements{
             priceWithTaxes = $(".summary_total_label"),
             finishButton = $(".cart_button");
 
-    public void cancelClick(){
+    public void cancelClick() {
         cancelButton.click();
     }
 
-    public void finishClick(){
+    public FinishPage finishClick() {
         finishButton.click();
+
+        return page(FinishPage.class);
     }
 
-    public  void checkEmpty(){
+    public FinishPage checkEmpty() {
         itemName.shouldNotBe(visible);
         itemDesc.shouldNotBe(visible);
         itemPrice.shouldNotBe(visible);
@@ -34,33 +37,35 @@ public class OverviewPage extends StaticElements{
         taxEl.shouldHave(text("$0.00"));
         priceWithTaxes.shouldHave(text("$0.00"));
         finishButton.click();
+
+        return page(FinishPage.class);
     }
 
-    public void checkItemName(String name){
+    public void checkItemName(String name) {
         itemName.shouldHave(text(name));
     }
 
-    public void checkItemDesc(String desc){
+    public void checkItemDesc(String desc) {
         itemDesc.shouldHave(text(desc));
     }
 
-    public void checkItemPrice(String price){
+    public void checkItemPrice(String price) {
         itemPrice.shouldHave(text(price));
     }
 
-    public void checkItemQuantity(String quantity){
+    public void checkItemQuantity(String quantity) {
         itemQuantity.shouldHave(text(quantity));
     }
 
-    public void checkItemsTotalPrice(String totalPrice){
+    public void checkItemsTotalPrice(String totalPrice) {
         itemsTotalPrice.shouldHave(text(totalPrice));
     }
 
-    public void checkTax(String tax){
+    public void checkTax(String tax) {
         taxEl.shouldHave(text(tax));
     }
 
-    public void checkPriceWithTaxes(String totalWithTax){
+    public void checkPriceWithTaxes(String totalWithTax) {
         priceWithTaxes.shouldHave(text(totalWithTax));
     }
 }

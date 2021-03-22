@@ -8,110 +8,82 @@ import uitest.swagshop.pages.CartPage;
 import uitest.swagshop.pages.LoginPage;
 import uitest.swagshop.pages.ShopPage;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
 
 public class ShopTests extends TestBase {
-    ShopPage shoppage;
+    static ShopPage shopPage;
+    CartPage cartPage;
 
     @BeforeAll
-    static void login(){
-        open("/");
-
-        new LoginPage().login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
+    static void login() {
+        LoginPage loginpage = open("/", LoginPage.class);
+        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
     @BeforeEach
-    void goToMain(){
-        open(DEFAULT_INVENTORY_PAGE);
+    void goToMain() {
+        shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
     }
 
     @Test
-    void addAndRemoveFromCartTest(){
-        CartPage cart;
-        cart = new CartPage();
-
-        shoppage = new ShopPage();
-
-        shoppage.addToCart(DEFAULT_ITEM);
-
-        shoppage.goToCart();
-
-        cart.cartShouldHave(DEFAULT_ITEM);
-        cart.continueShopping();
-
-        shoppage.removeFromCart(DEFAULT_ITEM);
-
-        shoppage.goToCart();
-
-        cart.cartShouldNotHave(DEFAULT_ITEM);
-        cart.continueShopping();
+    void addAndRemoveFromCartTest() {
+        shopPage.addToCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
+        cartPage.cartShouldHave(DEFAULT_ITEM);
+        shopPage = cartPage.continueShopping();
+        shopPage.removeFromCart(DEFAULT_ITEM);
+        cartPage = shopPage.goToCart();
+        cartPage.cartShouldNotHave(DEFAULT_ITEM);
+        shopPage = cartPage.continueShopping();
     }
 
     @Test
-    void pictureTest(){
-        shoppage = new ShopPage();
-
-        shoppage.checkPicture(DEFAULT_ITEM, DEFAULT_ITEM_PICTURE);
+    void pictureTest() {
+        shopPage.checkPicture(DEFAULT_ITEM, DEFAULT_ITEM_PICTURE);
     }
 
     @Test
-    void labelTest(){
-        shoppage = new ShopPage();
-
-        shoppage.checkPageLabel(DEFAULT_SHOP_LABEL);
+    void labelTest() {
+        shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
-    void pictureAltTest(){
-        shoppage = new ShopPage();
-
-        shoppage.checkAltForPicture(DEFAULT_ITEM);
+    void pictureAltTest() {
+        shopPage.checkAltForPicture(DEFAULT_ITEM);
     }
 
     @Test
-    void priceTest(){
-        shoppage = new ShopPage();
-
-        shoppage.checkPrice(DEFAULT_ITEM, DEFAULT_ITEM_PRICE);
+    void priceTest() {
+        shopPage.checkPrice(DEFAULT_ITEM, DEFAULT_ITEM_PRICE);
     }
 
     @Test
-    void sortAtoZTest(){
-        shoppage = new ShopPage();
-
-        shoppage.sortAtoZ();
-        shoppage.assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
+    void sortAtoZTest() {
+        shopPage.sortAtoZ();
+        shopPage.assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
-    void sortZtoATest(){
-        shoppage = new ShopPage();
-
-        shoppage.sortZtoA();
-        shoppage.assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
+    void sortZtoATest() {
+        shopPage.sortZtoA();
+        shopPage.assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
-    void sortLowToHighTest(){
-        shoppage = new ShopPage();
-
-        shoppage.sortLowToHigh();
-        shoppage.assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
+    void sortLowToHighTest() {
+        shopPage.sortLowToHigh();
+        shopPage.assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
-    void sortHighToLowTest(){
-        shoppage = new ShopPage();
-
-        shoppage.sortHighToLow();
-        shoppage.assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
+    void sortHighToLowTest() {
+        shopPage.sortHighToLow();
+        shopPage.assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
-    void socialButtonsTest(){
-        shoppage = new ShopPage();
-
-        shoppage.checkSocialButtons();
+    void socialButtonsTest() {
+        shopPage.checkSocialButtons();
     }
 }

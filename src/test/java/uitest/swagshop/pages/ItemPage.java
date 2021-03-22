@@ -3,8 +3,8 @@ package uitest.swagshop.pages;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.page;
 
 public class ItemPage extends StaticElements {
 
@@ -16,42 +16,44 @@ public class ItemPage extends StaticElements {
             headerName = $(".header_label"),
             addAndRemoveButton = $(".btn_inventory");
 
-    public void checkName(String name){
+    public void checkName(String name) {
         itemName.shouldHave(text(name));
     }
 
-    public void checkDesc(String desc){
+    public void checkDesc(String desc) {
         itemDesc.shouldHave(text(desc));
     }
 
-    public void checkPrice(String price){
+    public void checkPrice(String price) {
         itemPrice.shouldHave(text(price));
     }
 
-    public void checkImgSrc(String pic){
+    public void checkImgSrc(String pic) {
         itemPic.shouldHave(attribute("src", pic));
     }
 
-    public void checkImgAlt(String alt){
+    public void checkImgAlt(String alt) {
         itemPic.shouldHave(attribute("alt", alt));
     }
 
-    public void goBack(){
+    public ShopPage goBack() {
         backButton.click();
+
+        return page(ShopPage.class);
     }
 
-    public void checkHeaderName(String name){
+    public void checkHeaderName(String name) {
         headerName.shouldHave(text(name));
     }
 
-    public void addToCart(){
+    public void addToCart() {
         addAndRemoveButton.shouldHave(text("ADD TO CART"));
         addAndRemoveButton.click();
         addAndRemoveButton.shouldHave(text("REMOVE"));
         cartBadge.shouldBe(visible);
     }
 
-    public void removeFromCart(){
+    public void removeFromCart() {
         addAndRemoveButton.shouldHave(text("REMOVE"));
         addAndRemoveButton.click();
         addAndRemoveButton.shouldHave(text("ADD TO CART"));

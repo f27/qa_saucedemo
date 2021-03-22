@@ -1,10 +1,9 @@
 package uitest.swagshop.pages;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.CollectionCondition.sizeLessThan;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -37,16 +36,20 @@ public class CartPage extends StaticElements {
         cartList.shouldNotHave(text(item));
     }
 
-    public void continueShopping() {
+    public ShopPage continueShopping() {
         backButton.click();
+
+        return page(ShopPage.class);
     }
 
     public void isEmpty() {
         cartItems.first().shouldBe(hidden);
     }
 
-    public void checkOut() {
+    public CheckOutPage checkOut() {
         checkoutButton.click();
+
+        return page(CheckOutPage.class);
     }
 
     public void itemInCart(String name) {

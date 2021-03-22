@@ -13,91 +13,74 @@ import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
 
 public class ItemTests extends TestBase {
-    ItemPage itempage;
+    ItemPage itemPage;
+    ShopPage shopPage;
+    CartPage cartPage;
 
     @BeforeAll
-    static void login(){
-        open("/");
-
-        new LoginPage().login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
-        new ShopPage().goToItem(DEFAULT_ITEM);
+    static void login() {
+        LoginPage loginpage = open("/", LoginPage.class);
+        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
     @BeforeEach
-    void goToItemPage(){
-        open(DEFAULT_INVENTORY_PAGE);
-        new ShopPage().goToItem(DEFAULT_ITEM);
+    void goToItemPage() {
+        ShopPage shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
+        itemPage = shopPage.goToItem(DEFAULT_ITEM);
     }
 
     @Test
-    void itemNameTest(){
-        itempage = new ItemPage();
-
-        itempage.checkName(DEFAULT_ITEM);
+    void itemNameTest() {
+        itemPage.checkName(DEFAULT_ITEM);
     }
 
     @Test
-    void itemDescTest(){
-        itempage = new ItemPage();
-
-        itempage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
+    void itemDescTest() {
+        itemPage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
     }
 
     @Test
-    void itemPriceTest(){
-        itempage = new ItemPage();
-
-        itempage.checkPrice(DEFAULT_ITEM_PRICE);
+    void itemPriceTest() {
+        itemPage.checkPrice(DEFAULT_ITEM_PRICE);
     }
 
     @Test
-    void itemImgSrcTest(){
-        itempage = new ItemPage();
-
-        itempage.checkImgSrc(DEFAULT_ITEM_PICTURE);
+    void itemImgSrcTest() {
+        itemPage.checkImgSrc(DEFAULT_ITEM_PICTURE);
     }
 
     @Test
-    void itemImgAltTest(){
-        itempage = new ItemPage();
-
-        itempage.checkImgAlt(DEFAULT_ITEM);
+    void itemImgAltTest() {
+        itemPage.checkImgAlt(DEFAULT_ITEM);
     }
 
     @Test
-    void backButtonTest(){
-        itempage = new ItemPage();
-
-        itempage.goBack();
-        new ShopPage().checkPageLabel(DEFAULT_SHOP_LABEL);
+    void backButtonTest() {
+        shopPage = itemPage.goBack();
+        shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
-    void checkHeaderName(){
-        itempage = new ItemPage();
-
-        itempage.checkHeaderName(DEFAULT_HEADER);
+    void checkHeaderName() {
+        itemPage.checkHeaderName(DEFAULT_HEADER);
     }
 
     @Test
-    void addAndRemoveFromCartTest(){
-        CartPage cart;
-        cart = new CartPage();
+    void addAndRemoveFromCartTest() {
+        itemPage = new ItemPage();
 
-        itempage = new ItemPage();
+        itemPage.addToCart();
+        cartPage = itemPage.goToCart();
 
-        itempage.addToCart();
-        itempage.goToCart();
+        cartPage.cartShouldHave(DEFAULT_ITEM);
+        shopPage = cartPage.continueShopping();
 
-        cart.cartShouldHave(DEFAULT_ITEM);
-        cart.continueShopping();
+        itemPage = shopPage.goToItem(DEFAULT_ITEM);
 
-        new ShopPage().goToItem(DEFAULT_ITEM);
+        itemPage.removeFromCart();
+        cartPage = itemPage.goToCart();
 
-        itempage.removeFromCart();
-        itempage.goToCart();
-
-        cart.cartShouldNotHave(DEFAULT_ITEM);
-        cart.continueShopping();
+        cartPage.cartShouldNotHave(DEFAULT_ITEM);
+        cartPage.continueShopping();
     }
 }

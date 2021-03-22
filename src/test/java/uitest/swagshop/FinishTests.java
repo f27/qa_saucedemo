@@ -10,66 +10,50 @@ import static uitest.TestData.*;
 
 public class FinishTests extends TestBase {
     FinishPage finishPage;
+    CheckOutPage checkOutPage;
+    OverviewPage overviewPage;
+    ShopPage shopPage;
+    CartPage cartPage;
 
     @BeforeAll
-    static void login(){
-        open("/");
-
-        new LoginPage().login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
+    static void login() {
+        LoginPage loginpage = open("/", LoginPage.class);
+        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
     @Test
-    void hasThanksTest(){
-        finishPage = new FinishPage();
-        open(DEFAULT_THANKS_PAGE);
+    void hasThanksTest() {
+        finishPage = open(DEFAULT_THANKS_PAGE, FinishPage.class);
         finishPage.hasThanks();
     }
 
     @Test
-    void finishResetCartTest(){
-        ShopPage shopPage;
-        CartPage cartPage;
-        CheckOutPage checkOutPage;
-        OverviewPage overviewPage;
-
-        shopPage = new ShopPage();
-        cartPage = new CartPage();
-        checkOutPage = new CheckOutPage();
-        overviewPage = new OverviewPage();
-        finishPage = new FinishPage();
-
-        open(DEFAULT_INVENTORY_PAGE);
+    void finishResetCartTest() {
+        shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
 
         shopPage.addToCart(DEFAULT_ITEM);
-        shopPage.goToCart();
-        cartPage.checkOut();
+        cartPage = shopPage.goToCart();
+        checkOutPage = cartPage.checkOut();
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
-        checkOutPage.submitForm();
-        overviewPage.finishClick();
+        overviewPage = checkOutPage.submitForm();
+        finishPage = overviewPage.finishClick();
         finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
-        finishPage.menuClickByText("All Items");
-        shopPage.goToCart();
+        shopPage = finishPage.goToShop();
+        cartPage = shopPage.goToCart();
         cartPage.isEmpty();
     }
 
     @Test
-    void visitFinishNotResetCartTest(){
-        ShopPage shopPage;
-        CartPage cartPage;
-
-        shopPage = new ShopPage();
-        cartPage = new CartPage();
-        finishPage = new FinishPage();
-
-        open(DEFAULT_INVENTORY_PAGE);
+    void visitFinishNotResetCartTest() {
+        shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
 
         shopPage.addToCart(DEFAULT_ITEM);
 
-        open(DEFAULT_THANKS_PAGE);
+        finishPage = open(DEFAULT_THANKS_PAGE, FinishPage.class);
 
         finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
 
-        open(DEFAULT_CART_PAGE);
+        cartPage = open(DEFAULT_CART_PAGE, CartPage.class);
 
         cartPage.itemInCart(DEFAULT_ITEM);
         cartPage.clear();

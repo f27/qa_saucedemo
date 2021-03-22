@@ -3,6 +3,7 @@ package uitest.swagshop;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 import uitest.swagshop.pages.LoginPage;
+import uitest.swagshop.pages.ShopPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
@@ -14,9 +15,9 @@ public class LoginTests extends TestBase {
     public void successLoginTest(){
         loginpage = open("/", LoginPage.class);
 
-        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
+        ShopPage shopPage = loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
         loginpage.assertLogin();
-        loginpage.logout();
+        shopPage.menuClickByText("Logout");
     }
 
     @Test
