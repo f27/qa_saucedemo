@@ -18,10 +18,6 @@ public class OverviewPage extends StaticElements {
             priceWithTaxes = $(".summary_total_label"),
             finishButton = $(".cart_button");
 
-    public void cancelClick() {
-        cancelButton.click();
-    }
-
     public FinishPage finishClick() {
         finishButton.click();
 
