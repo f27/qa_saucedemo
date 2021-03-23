@@ -1,15 +1,13 @@
 package uitest.swagshop;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import uitest.TestBase;
 import uitest.swagshop.pages.*;
 
 import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
 
+@DisplayName("Overview tests")
 public class OverviewTests extends TestBase {
     static OverviewPage overviewPage;
     ShopPage shopPage;
@@ -36,22 +34,26 @@ public class OverviewTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Testing header")
     void checkSubHeaderTest() {
         overviewPage.checkSubHeader(DEFAULT_CHECKOUT_OVERVIEW_LABEL);
     }
 
     @Test
+    @DisplayName("Social buttons")
     void socialButtonsTest() {
         overviewPage.checkSocialButtons();
     }
 
     @Test
+    @DisplayName("Testing empty checkout")
     void emptyCheckOut() {
         finishPage = overviewPage.checkEmpty();
         finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
     }
 
     @Test
+    @DisplayName("Testing with item")
     void checkWithItem() {
         shopPage = overviewPage.goToShop();
         shopPage.addToCart(DEFAULT_ITEM);

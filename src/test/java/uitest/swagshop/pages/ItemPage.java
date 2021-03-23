@@ -1,6 +1,7 @@
 package uitest.swagshop.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -42,10 +43,12 @@ public class ItemPage extends StaticElements {
         return page(ShopPage.class);
     }
 
+    @Step("Page's header should have {name}")
     public void checkHeaderName(String name) {
         headerName.shouldHave(text(name));
     }
 
+    @Step("Click on Add to cart")
     public void addToCart() {
         addAndRemoveButton.shouldHave(text("ADD TO CART"));
         addAndRemoveButton.click();
@@ -53,6 +56,7 @@ public class ItemPage extends StaticElements {
         cartBadge.shouldBe(visible);
     }
 
+    @Step("Click on Remove")
     public void removeFromCart() {
         addAndRemoveButton.shouldHave(text("REMOVE"));
         addAndRemoveButton.click();

@@ -2,6 +2,7 @@ package uitest.swagshop;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 import uitest.swagshop.pages.CartPage;
@@ -11,6 +12,7 @@ import uitest.swagshop.pages.ShopPage;
 import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
 
+@DisplayName("Shop tests")
 public class ShopTests extends TestBase {
     static ShopPage shopPage;
     CartPage cartPage;
@@ -27,6 +29,7 @@ public class ShopTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Add and remove from cart")
     void addAndRemoveFromCartTest() {
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
@@ -39,50 +42,59 @@ public class ShopTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Testing picture")
     void pictureTest() {
         shopPage.checkPicture(DEFAULT_ITEM, DEFAULT_ITEM_PICTURE);
     }
 
     @Test
+    @DisplayName("Checking page label")
     void labelTest() {
         shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
+    @DisplayName("Testing picture's alt")
     void pictureAltTest() {
         shopPage.checkAltForPicture(DEFAULT_ITEM);
     }
 
     @Test
+    @DisplayName("Testing price")
     void priceTest() {
         shopPage.checkPrice(DEFAULT_ITEM, DEFAULT_ITEM_PRICE);
     }
 
     @Test
+    @DisplayName("Testing sort A to Z")
     void sortAtoZTest() {
         shopPage.sortAtoZ();
         shopPage.assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
+    @DisplayName("Testing sort Z to A")
     void sortZtoATest() {
         shopPage.sortZtoA();
         shopPage.assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
+    @DisplayName("Testing sort low to high")
     void sortLowToHighTest() {
         shopPage.sortLowToHigh();
         shopPage.assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
+    @DisplayName("Testing sort high to low")
     void sortHighToLowTest() {
         shopPage.sortHighToLow();
         shopPage.assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
+    @DisplayName("Testing social buttons")
     void socialButtonsTest() {
         shopPage.checkSocialButtons();
     }

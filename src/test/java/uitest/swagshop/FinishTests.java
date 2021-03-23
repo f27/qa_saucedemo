@@ -1,6 +1,7 @@
 package uitest.swagshop;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import uitest.TestBase;
 import uitest.swagshop.pages.*;
@@ -8,6 +9,7 @@ import uitest.swagshop.pages.*;
 import static com.codeborne.selenide.Selenide.open;
 import static uitest.TestData.*;
 
+@DisplayName("Thanks page test")
 public class FinishTests extends TestBase {
     FinishPage finishPage;
     CheckOutPage checkOutPage;
@@ -22,12 +24,14 @@ public class FinishTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Testing thanks page")
     void hasThanksTest() {
         finishPage = open(DEFAULT_THANKS_PAGE, FinishPage.class);
         finishPage.hasThanks();
     }
 
     @Test
+    @DisplayName("Visit to thanks page should reset cart")
     void finishResetCartTest() {
         shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
 
@@ -44,6 +48,7 @@ public class FinishTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Direct visit to thanks page should not reset cart")
     void visitFinishNotResetCartTest() {
         shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
 

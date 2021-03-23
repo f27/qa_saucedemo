@@ -30,5 +30,7 @@ public class TestData {
             DEFAULT_THANKS_LABEL = "Finish",
             DEFAULT_FIRSTNAME = "Alex",
             DEFAULT_LASTNAME = "Petrov",
-            DEFAULT_ZIP = "12321";
+            DEFAULT_ZIP = "12321",
+            ERROR_LOGIN_WRONG_PASSWORD = "Epic sadface: Username and password do not match any user in this service",
+            ERROR_LOGIN_LOCKED_OUT = "Epic sadface: Sorry, this user has been locked out.";
 }

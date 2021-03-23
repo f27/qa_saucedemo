@@ -1,6 +1,7 @@
 package uitest.swagshop.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
@@ -12,9 +13,7 @@ public class LoginPage {
             passwordField = $("[data-test = password]"),
             error = $("[data-test = error]");
 
-    final String wrongUsernameOrPasswordMess = "Epic sadface: Username and password do not match any user in this service",
-            lockedOutMess = "Epic sadface: Sorry, this user has been locked out.";
-
+    @Step("Login: {username}, Password:{password}")
     public ShopPage login(String username, String password) {
         usernameField.setValue(username);
         passwordField.setValue(password).pressEnter();
@@ -22,19 +21,13 @@ public class LoginPage {
         return page(ShopPage.class);
     }
 
-    public void isLockedOut() {
-        assertError(lockedOutMess);
-    }
-
-    public void isWrongUsernameOrPassword() {
-        assertError(wrongUsernameOrPasswordMess);
-    }
-
+    @Step("Login is successful")
     public void assertLogin() {
         new ShopPage().hasMenu();
     }
 
-    private void assertError(String errorMessage) {
+    @Step("Error message should be: {errorMessage}")
+    public void assertError(String errorMessage) {
         error.shouldHave(text(errorMessage));
     }
 }
