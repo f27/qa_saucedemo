@@ -1,14 +1,14 @@
-package uitest.swagshop;
+package tests.tests;
 
 import org.junit.jupiter.api.*;
-import uitest.TestBase;
-import uitest.swagshop.pages.CartPage;
-import uitest.swagshop.pages.CheckOutPage;
-import uitest.swagshop.pages.LoginPage;
-import uitest.swagshop.pages.ShopPage;
+import tests.TestBase;
+import tests.pages.CartPage;
+import tests.pages.CheckOutPage;
+import tests.pages.LoginPage;
+import tests.pages.ShopPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static uitest.TestData.*;
+import static tests.TestData.*;
 
 @DisplayName("Cart tests")
 public class CartTests extends TestBase {

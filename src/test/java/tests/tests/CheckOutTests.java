@@ -1,17 +1,17 @@
-package uitest.swagshop;
+package tests.tests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import uitest.TestBase;
-import uitest.swagshop.pages.CartPage;
-import uitest.swagshop.pages.CheckOutPage;
-import uitest.swagshop.pages.LoginPage;
-import uitest.swagshop.pages.OverviewPage;
+import tests.TestBase;
+import tests.pages.CartPage;
+import tests.pages.CheckOutPage;
+import tests.pages.LoginPage;
+import tests.pages.OverviewPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static uitest.TestData.*;
+import static tests.TestData.*;
 
 @DisplayName("Checkout test")
 public class CheckOutTests extends TestBase {

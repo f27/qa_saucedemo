@@ -1,4 +1,4 @@
-package uitest;
+package tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
@@ -9,8 +9,8 @@ public class TestBase {
 
         @BeforeAll
         static void setup() {
+            SelenideLogger.addListener("allure", new AllureSelenide().screenshots(true));
             Configuration.startMaximized = true;
             Configuration.baseUrl = "https://www.saucedemo.com";
-            SelenideLogger.addListener("allure", new AllureSelenide().screenshots(true));
         }
 }

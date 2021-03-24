@@ -1,13 +1,13 @@
-package uitest.swagshop;
+package tests.tests;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import uitest.TestBase;
-import uitest.swagshop.pages.LoginPage;
-import uitest.swagshop.pages.ShopPage;
+import tests.TestBase;
+import tests.pages.LoginPage;
+import tests.pages.ShopPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static uitest.TestData.*;
+import static tests.TestData.*;
 
 @DisplayName("Login tests")
 public class LoginTests extends TestBase {

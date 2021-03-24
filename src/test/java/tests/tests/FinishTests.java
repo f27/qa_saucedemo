@@ -1,13 +1,13 @@
-package uitest.swagshop;
+package tests.tests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import uitest.TestBase;
-import uitest.swagshop.pages.*;
+import tests.TestBase;
+import tests.pages.*;
 
 import static com.codeborne.selenide.Selenide.open;
-import static uitest.TestData.*;
+import static tests.TestData.*;
 
 @DisplayName("Thanks page test")
 public class FinishTests extends TestBase {

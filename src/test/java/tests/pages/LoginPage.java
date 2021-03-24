@@ -1,4 +1,4 @@
-package uitest.swagshop.pages;
+package tests.pages;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

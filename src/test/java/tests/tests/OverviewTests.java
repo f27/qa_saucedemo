@@ -1,11 +1,11 @@
-package uitest.swagshop;
+package tests.tests;
 
 import org.junit.jupiter.api.*;
-import uitest.TestBase;
-import uitest.swagshop.pages.*;
+import tests.TestBase;
+import tests.pages.*;
 
 import static com.codeborne.selenide.Selenide.open;
-import static uitest.TestData.*;
+import static tests.TestData.*;
 
 @DisplayName("Overview tests")
 public class OverviewTests extends TestBase {
