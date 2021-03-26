@@ -19,7 +19,7 @@ public class LoginTests extends TestBase {
         loginpage = open("/", LoginPage.class);
 
         ShopPage shopPage = loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
-        loginpage.assertLogin();
+        shopPage.hasMenu();
         shopPage.menuClickByText("Logout");
     }
 

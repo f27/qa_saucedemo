@@ -16,8 +16,6 @@ import static tests.TestData.*;
 @DisplayName("Checkout test")
 public class CheckOutTests extends TestBase {
     CheckOutPage checkOutPage;
-    OverviewPage overviewPage;
-    CartPage cartPage;
 
     @BeforeAll
     static void login() {
@@ -46,7 +44,7 @@ public class CheckOutTests extends TestBase {
     @DisplayName("Correct from submit")
     void successFillForm() {
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
-        overviewPage = checkOutPage.submitForm();
+        OverviewPage overviewPage = checkOutPage.submitForm();
         overviewPage.checkSubHeader(DEFAULT_CHECKOUT_OVERVIEW_LABEL);
     }
 
@@ -77,7 +75,7 @@ public class CheckOutTests extends TestBase {
     @Test
     @DisplayName("Testing cancel button")
     void checkCancelButton() {
-        cartPage = checkOutPage.cancelClick();
+        CartPage cartPage = checkOutPage.cancelClick();
         cartPage.checkSubHeader(DEFAULT_CART_LABEL);
     }
 }

@@ -21,11 +21,6 @@ public class LoginPage {
         return page(ShopPage.class);
     }
 
-    @Step("Login is successful")
-    public void assertLogin() {
-        new ShopPage().hasMenu();
-    }
-
     @Step("Error message should be: {errorMessage}")
     public void assertError(String errorMessage) {
         error.shouldHave(text(errorMessage));

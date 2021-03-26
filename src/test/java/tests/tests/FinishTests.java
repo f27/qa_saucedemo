@@ -12,10 +12,6 @@ import static tests.TestData.*;
 @DisplayName("Thanks page test")
 public class FinishTests extends TestBase {
     FinishPage finishPage;
-    CheckOutPage checkOutPage;
-    OverviewPage overviewPage;
-    ShopPage shopPage;
-    CartPage cartPage;
 
     @BeforeAll
     static void login() {
@@ -33,13 +29,13 @@ public class FinishTests extends TestBase {
     @Test
     @DisplayName("Visit to thanks page should reset cart")
     void finishResetCartTest() {
-        shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
+        ShopPage shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
 
         shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-        checkOutPage = cartPage.checkOut();
+        CartPage cartPage = shopPage.goToCart();
+        CheckOutPage checkOutPage = cartPage.checkOut();
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
-        overviewPage = checkOutPage.submitForm();
+        OverviewPage overviewPage = checkOutPage.submitForm();
         finishPage = overviewPage.finishClick();
         finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
         shopPage = finishPage.goToShop();
@@ -50,7 +46,7 @@ public class FinishTests extends TestBase {
     @Test
     @DisplayName("Direct visit to thanks page should not reset cart")
     void visitFinishNotResetCartTest() {
-        shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
+        ShopPage shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
 
         shopPage.addToCart(DEFAULT_ITEM);
 
@@ -58,7 +54,7 @@ public class FinishTests extends TestBase {
 
         finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
 
-        cartPage = open(DEFAULT_CART_PAGE, CartPage.class);
+        CartPage cartPage = open(DEFAULT_CART_PAGE, CartPage.class);
 
         cartPage.itemInCart(DEFAULT_ITEM);
         cartPage.clear();

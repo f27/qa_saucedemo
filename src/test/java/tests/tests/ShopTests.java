@@ -15,7 +15,6 @@ import static tests.TestData.*;
 @DisplayName("Shop tests")
 public class ShopTests extends TestBase {
     static ShopPage shopPage;
-    CartPage cartPage;
 
     @BeforeAll
     static void login() {
@@ -32,7 +31,7 @@ public class ShopTests extends TestBase {
     @DisplayName("Add and remove from cart")
     void addAndRemoveFromCartTest() {
         shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
+        CartPage cartPage = shopPage.goToCart();
         cartPage.cartShouldHave(DEFAULT_ITEM);
         shopPage = cartPage.continueShopping();
         shopPage.removeFromCart(DEFAULT_ITEM);

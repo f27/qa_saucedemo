@@ -13,9 +13,6 @@ import static tests.TestData.*;
 @DisplayName("Cart tests")
 public class CartTests extends TestBase {
     CartPage cartPage;
-    ShopPage shopPage;
-    CheckOutPage checkOutPage;
-
 
     @BeforeAll
     static void login() {
@@ -54,21 +51,21 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Testing continue shopping button")
     void continueShoppingTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
         shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
     @DisplayName("Testing checkout")
     void checkOutTest() {
-        checkOutPage = cartPage.checkOut();
+        CheckOutPage checkOutPage = cartPage.checkOut();
         checkOutPage.checkSubHeader(DEFAULT_CHECKOUT_LABEL);
     }
 
     @Test
     @DisplayName("Testing item is in cart")
     void itemInCartTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         shopPage.addToCart(DEFAULT_CHEAP_ITEM);
@@ -85,7 +82,7 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Checking item's name")
     void checkItemNameTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
@@ -96,7 +93,7 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Checking item's description")
     void checkItemDescTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
@@ -107,7 +104,7 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Checking item's price")
     void checkItemPriceTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
@@ -118,7 +115,7 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Checking item's quantity")
     void checkItemQuantityTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
@@ -129,7 +126,7 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Testing remove from cart")
     void removeItemTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
@@ -141,12 +138,12 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Testing checkout item")
     void checkOutItemTest() {
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         shopPage.addToCart(DEFAULT_ITEM);
         cartPage = shopPage.goToCart();
 
-        checkOutPage = cartPage.checkOut();
+        CheckOutPage checkOutPage = cartPage.checkOut();
 
         checkOutPage.checkSubHeader(DEFAULT_CHECKOUT_LABEL);
     }

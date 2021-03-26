@@ -16,8 +16,6 @@ import static tests.TestData.*;
 @DisplayName("Item page test")
 public class ItemTests extends TestBase {
     ItemPage itemPage;
-    ShopPage shopPage;
-    CartPage cartPage;
 
     @BeforeAll
     static void login() {
@@ -64,7 +62,7 @@ public class ItemTests extends TestBase {
     @Test
     @DisplayName("Testing Back button")
     void backButtonTest() {
-        shopPage = itemPage.goBack();
+        ShopPage shopPage = itemPage.goBack();
         shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
@@ -80,10 +78,10 @@ public class ItemTests extends TestBase {
         itemPage = new ItemPage();
 
         itemPage.addToCart();
-        cartPage = itemPage.goToCart();
+        CartPage cartPage = itemPage.goToCart();
 
         cartPage.cartShouldHave(DEFAULT_ITEM);
-        shopPage = cartPage.continueShopping();
+        ShopPage shopPage = cartPage.continueShopping();
 
         itemPage = shopPage.goToItem(DEFAULT_ITEM);
 

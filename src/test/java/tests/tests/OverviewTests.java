@@ -9,11 +9,7 @@ import static tests.TestData.*;
 
 @DisplayName("Overview tests")
 public class OverviewTests extends TestBase {
-    static OverviewPage overviewPage;
-    ShopPage shopPage;
-    CartPage cartPage;
-    CheckOutPage checkOutPage;
-    FinishPage finishPage;
+    OverviewPage overviewPage;
 
     @BeforeAll
     static void login() {
@@ -23,7 +19,7 @@ public class OverviewTests extends TestBase {
 
     @BeforeEach
     void goToOverview() {
-        checkOutPage = open(DEFAULT_CHECKOUT_PAGE, CheckOutPage.class);
+        CheckOutPage checkOutPage = open(DEFAULT_CHECKOUT_PAGE, CheckOutPage.class);
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
         overviewPage = checkOutPage.submitForm();
     }
@@ -48,17 +44,17 @@ public class OverviewTests extends TestBase {
     @Test
     @DisplayName("Testing empty checkout")
     void emptyCheckOut() {
-        finishPage = overviewPage.checkEmpty();
+        FinishPage finishPage = overviewPage.checkEmpty();
         finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
     }
 
     @Test
     @DisplayName("Testing with item")
     void checkWithItem() {
-        shopPage = overviewPage.goToShop();
+        ShopPage shopPage = overviewPage.goToShop();
         shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-        checkOutPage = cartPage.checkOut();
+        CartPage cartPage = shopPage.goToCart();
+        CheckOutPage checkOutPage = cartPage.checkOut();
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
         overviewPage = checkOutPage.submitForm();
 
