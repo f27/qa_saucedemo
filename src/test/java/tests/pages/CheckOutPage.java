@@ -16,10 +16,12 @@ public class CheckOutPage extends StaticElements {
             continueButton = $(".cart_button");
 
     @Step("Fill form")
-    public void fillForm(String firstName, String lastName, String zipCode) {
+    public CheckOutPage fillForm(String firstName, String lastName, String zipCode) {
         firstNameEl.setValue(firstName);
         lastNameEl.setValue(lastName);
         zipCodeEl.setValue(zipCode);
+
+        return this;
     }
 
     @Step("Submit form")
@@ -27,6 +29,13 @@ public class CheckOutPage extends StaticElements {
         continueButton.click();
 
         return page(OverviewPage.class);
+    }
+
+    @Step("Submit form")
+    public CheckOutPage unsuccessfulSubmitForm() {
+        continueButton.click();
+
+        return this;
     }
 
     @Step("Page has error {errorMessage}")
