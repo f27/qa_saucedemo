@@ -14,7 +14,6 @@ import static tests.TestData.*;
 
 @DisplayName("Thanks page test")
 public class FinishTests extends TestBase {
-    FinishPage finishPage;
 
     @BeforeAll
     static void login() {
