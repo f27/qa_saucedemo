@@ -25,7 +25,6 @@ public class StaticElements {
         subHeader.shouldHave(text(label));
     }
 
-    @Step("Page should have menu button")
     public void hasMenu() {
         menuButton.shouldBe(visible);
     }

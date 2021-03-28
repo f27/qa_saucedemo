@@ -16,8 +16,10 @@ public class ShopPage extends StaticElements {
     final private ElementsCollection itemNames = $$(".inventory_item_name");
 
     @Step("Header should have {label}")
-    public void checkPageLabel(String label) {
+    public ShopPage checkPageLabel(String label) {
         pageLabel.shouldHave(text(label));
+
+        return this;
     }
 
     @Step("Going to {item}'s page")
@@ -28,51 +30,67 @@ public class ShopPage extends StaticElements {
     }
 
     @Step("Add {item} to cart")
-    public void addToCart(String item) {
+    public ShopPage addToCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_primary.btn_inventory").click();
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("REMOVE"));
         cartBadge.shouldBe(visible);
+
+        return this;
     }
 
     @Step("Remove {item} from cart")
-    public void removeFromCart(String item) {
+    public ShopPage removeFromCart(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_secondary.btn_inventory").click();
         itemNames.findBy(text(item)).parent().parent().parent().$(".btn_inventory").shouldHave(text("ADD TO CART"));
         cartBadge.shouldNotBe(visible);
+
+        return this;
     }
 
     @Step("{item}'s picture should be {picUrl}")
-    public void checkPicture(String item, String picUrl) {
+    public ShopPage checkPicture(String item, String picUrl) {
         itemNames.findBy(text(item)).parent().parent().parent().find("img").shouldHave(attribute("src", picUrl));
+
+        return this;
     }
 
-    @Step("Pic ture should have alt='{item}'")
-    public void checkAltForPicture(String item) {
+    @Step("Picture should have alt='{item}'")
+    public ShopPage checkAltForPicture(String item) {
         itemNames.findBy(text(item)).parent().parent().parent().find("img").shouldHave(attribute("alt", item));
+
+        return this;
     }
 
     @Step("{item}'s price should be {price}")
-    public void checkPrice(String item, String price) {
+    public ShopPage checkPrice(String item, String price) {
         itemNames.findBy(text(item)).parent().parent().parent().find(".inventory_item_price").shouldHave(text(price));
         itemNames.findBy(text(item)).click();
         priceInInventory.shouldHave(text(price));
+
+        return this;
     }
 
     @Step("Sort A to Z")
-    public void sortAtoZ() {
+    public ShopPage sortAtoZ() {
         sorting.selectOption("Name (A to Z)");
+
+        return this;
     }
 
     @Step("First item should be: {aItem}, last: {zItem}")
-    public void assertSortAtoZ(String aItem, String zItem) {
+    public ShopPage assertSortAtoZ(String aItem, String zItem) {
         sorting.getSelectedOption().shouldHave(text("Name (A to Z)"));
         itemNames.first().shouldHave(text(aItem));
         itemNames.last().shouldHave(text(zItem));
+
+        return this;
     }
 
     @Step("Sort Z to A")
-    public void sortZtoA() {
+    public ShopPage sortZtoA() {
         sorting.selectOption("Name (Z to A)");
+
+        return this;
     }
 
     @Step("First item should be: {zItem}, last: {aItem}")
@@ -83,8 +101,10 @@ public class ShopPage extends StaticElements {
     }
 
     @Step("Sort low to high")
-    public void sortLowToHigh() {
+    public ShopPage sortLowToHigh() {
         sorting.selectOption("Price (low to high)");
+
+        return this;
     }
 
     @Step("First item should be: {cheapItem}, last: {expensiveItem}")
@@ -95,8 +115,10 @@ public class ShopPage extends StaticElements {
     }
 
     @Step("Sort high to low")
-    public void sortHighToLow() {
+    public ShopPage sortHighToLow() {
         sorting.selectOption("Price (high to low)");
+
+        return this;
     }
 
     @Step("First item should be: {expensiveItem}, last: {cheapItem}")
@@ -104,5 +126,12 @@ public class ShopPage extends StaticElements {
         sorting.getSelectedOption().shouldHave(text("Price (high to low)"));
         itemNames.last().shouldHave(text(cheapItem));
         itemNames.first().shouldHave(text(expensiveItem));
+    }
+
+    @Step("Page should have menu button")
+    public ShopPage shouldHaveMenu() {
+        hasMenu();
+
+        return this;
     }
 }
