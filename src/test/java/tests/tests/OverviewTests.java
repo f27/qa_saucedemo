@@ -19,9 +19,9 @@ public class OverviewTests extends TestBase {
 
     @BeforeEach
     void goToOverview() {
-        CheckOutPage checkOutPage = open(DEFAULT_CHECKOUT_PAGE, CheckOutPage.class);
-        checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
-        overviewPage = checkOutPage.submitForm();
+        overviewPage = open(DEFAULT_CHECKOUT_PAGE, CheckOutPage.class)
+                .fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP)
+                .submitForm();
     }
 
     @AfterEach
@@ -44,29 +44,27 @@ public class OverviewTests extends TestBase {
     @Test
     @DisplayName("Testing empty checkout")
     void emptyCheckOut() {
-        FinishPage finishPage = overviewPage.checkEmpty();
-        finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
+        overviewPage.checkEmpty()
+                .checkSubHeader(DEFAULT_THANKS_LABEL);
     }
 
     @Test
     @DisplayName("Testing with item")
     void checkWithItem() {
-        ShopPage shopPage = overviewPage.goToShop();
-        shopPage.addToCart(DEFAULT_ITEM);
-        CartPage cartPage = shopPage.goToCart();
-        CheckOutPage checkOutPage = cartPage.checkOut();
-        checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
-        overviewPage = checkOutPage.submitForm();
-
-        overviewPage.checkItemName(DEFAULT_ITEM);
-        overviewPage.checkItemDesc(DEFAULT_ITEM_DESCRIPTION);
-        overviewPage.checkItemPrice(DEFAULT_ITEM_PRICE);
-        overviewPage.checkItemQuantity("1");
-        overviewPage.checkTax(DEFAULT_TAX);
-        overviewPage.checkItemsTotalPrice(DEFAULT_ITEM_PRICE);
-        overviewPage.checkPriceWithTaxes(DEFAULT_TOTAL);
-        overviewPage.finishClick();
-
-        new FinishPage().checkSubHeader(DEFAULT_THANKS_LABEL);
+        overviewPage.goToShop()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .checkOut()
+                .fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP)
+                .submitForm()
+                .checkItemsNameInOverview(DEFAULT_ITEM)
+                .checkItemDesc(DEFAULT_ITEM_DESCRIPTION)
+                .checkItemPrice(DEFAULT_ITEM_PRICE)
+                .checkItemQuantity("1")
+                .checkTax(DEFAULT_TAX)
+                .checkItemsTotalPrice(DEFAULT_ITEM_PRICE)
+                .checkPriceWithTaxes(DEFAULT_TOTAL)
+                .finishClick()
+                .checkSubHeader(DEFAULT_THANKS_LABEL);
     }
 }

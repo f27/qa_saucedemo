@@ -40,37 +40,51 @@ public class OverviewPage extends StaticElements {
     }
 
     @Step("Item is {name}")
-    public void checkItemName(String name) {
+    public OverviewPage checkItemsNameInOverview(String name) {
         itemName.shouldHave(text(name));
+
+        return this;
     }
 
     @Step("Item's description is {desc}")
-    public void checkItemDesc(String desc) {
+    public OverviewPage checkItemDesc(String desc) {
         itemDesc.shouldHave(text(desc));
+
+        return this;
     }
 
     @Step("Item's price is {price}")
-    public void checkItemPrice(String price) {
+    public OverviewPage checkItemPrice(String price) {
         itemPrice.shouldHave(text(price));
+
+        return this;
     }
 
     @Step("Item's quantity is {quantity}")
-    public void checkItemQuantity(String quantity) {
+    public OverviewPage checkItemQuantity(String quantity) {
         itemQuantity.shouldHave(text(quantity));
+
+        return this;
     }
 
     @Step("Total price is {totalPrice}")
-    public void checkItemsTotalPrice(String totalPrice) {
+    public OverviewPage checkItemsTotalPrice(String totalPrice) {
         itemsTotalPrice.shouldHave(text(totalPrice));
+
+        return this;
     }
 
     @Step("Tax is {tax}")
-    public void checkTax(String tax) {
+    public OverviewPage checkTax(String tax) {
         taxEl.shouldHave(text(tax));
+
+        return this;
     }
 
     @Step("Total price with tax is {totalWithTax}")
-    public void checkPriceWithTaxes(String totalWithTax) {
+    public OverviewPage checkPriceWithTaxes(String totalWithTax) {
         priceWithTaxes.shouldHave(text(totalWithTax));
+
+        return this;
     }
 }
