@@ -27,7 +27,7 @@ public class CartTests extends TestBase {
 
     @AfterEach
     void cleanCart() {
-        cartPage.clear();
+        cartPage.cartClear();
     }
 
     @Test
@@ -51,100 +51,84 @@ public class CartTests extends TestBase {
     @Test
     @DisplayName("Testing continue shopping button")
     void continueShoppingTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-        shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
+        cartPage.continueShopping()
+                .checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
     @DisplayName("Testing checkout")
     void checkOutTest() {
-        CheckOutPage checkOutPage = cartPage.checkOut();
-        checkOutPage.checkSubHeader(DEFAULT_CHECKOUT_LABEL);
+        cartPage.checkOut()
+                .checkSubHeader(DEFAULT_CHECKOUT_LABEL);
     }
 
     @Test
     @DisplayName("Testing item is in cart")
     void itemInCartTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        shopPage.addToCart(DEFAULT_CHEAP_ITEM);
-        cartPage = shopPage.goToCart();
-
-        cartPage.itemInCart(DEFAULT_ITEM);
-        cartPage.itemInCart(DEFAULT_CHEAP_ITEM);
-
-        cartPage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
-        cartPage.checkPrice(DEFAULT_ITEM_PRICE);
-        cartPage.checkQuantity("1");
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .addToCart(DEFAULT_CHEAP_ITEM)
+                .goToCart()
+                .itemInCart(DEFAULT_ITEM)
+                .itemInCart(DEFAULT_CHEAP_ITEM)
+                .checkDesc(DEFAULT_ITEM_DESCRIPTION)
+                .checkPrice(DEFAULT_ITEM_PRICE)
+                .quantityShouldBe("1");
     }
 
     @Test
     @DisplayName("Checking item's name")
     void checkItemNameTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-
-        cartPage.checkName(DEFAULT_ITEM);
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .checkItemsInCartName(DEFAULT_ITEM);
     }
 
     @Test
     @DisplayName("Checking item's description")
     void checkItemDescTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-
-        cartPage.checkDesc(DEFAULT_ITEM_DESCRIPTION);
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .checkDesc(DEFAULT_ITEM_DESCRIPTION);
     }
 
     @Test
     @DisplayName("Checking item's price")
     void checkItemPriceTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-
-        cartPage.checkPrice(DEFAULT_ITEM_PRICE);
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .checkPrice(DEFAULT_ITEM_PRICE);
     }
 
     @Test
     @DisplayName("Checking item's quantity")
     void checkItemQuantityTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-
-        cartPage.checkQuantity("1");
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .quantityShouldBe("1");
     }
 
     @Test
     @DisplayName("Testing remove from cart")
     void removeItemTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-
-        cartPage.itemInCart(DEFAULT_ITEM);
-        cartPage.clear();
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .itemInCart(DEFAULT_ITEM)
+                .cartClear();
     }
 
     @Test
     @DisplayName("Testing checkout item")
     void checkOutItemTest() {
-        ShopPage shopPage = cartPage.continueShopping();
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-
-        CheckOutPage checkOutPage = cartPage.checkOut();
-
-        checkOutPage.checkSubHeader(DEFAULT_CHECKOUT_LABEL);
+        cartPage.continueShopping()
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .checkOut()
+                .checkSubHeader(DEFAULT_CHECKOUT_LABEL);
     }
 }

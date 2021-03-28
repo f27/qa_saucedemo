@@ -26,7 +26,7 @@ public class OverviewTests extends TestBase {
 
     @AfterEach
     void clearCart() {
-        new CartPage().clear();
+        new CartPage().cartClear();
     }
 
     @Test

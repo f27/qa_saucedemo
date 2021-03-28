@@ -22,7 +22,7 @@ public class CartPage extends StaticElements {
     final private ElementsCollection cartItems = $$(".cart_item");
 
     @Step("Clear cart")
-    public void clear() {
+    public void cartClear() {
         cartLink.click();
         cartItems.forEach(item -> item.$(".btn_secondary").click());
 
@@ -64,28 +64,36 @@ public class CartPage extends StaticElements {
     }
 
     @Step("Verify {name} is in cart")
-    public void itemInCart(String name) {
+    public CartPage itemInCart(String name) {
         cartItems.findBy(text(name)).shouldBe(visible);
+
+        return this;
     }
 
     @Step("Item should be {name}")
-    public void checkName(String name) {
+    public void checkItemsInCartName(String name) {
         itemName.shouldHave(text(name));
     }
 
     @Step("Description should be {desc}")
-    public void checkDesc(String desc) {
+    public CartPage checkDesc(String desc) {
         itemDesc.shouldHave(text(desc));
+
+        return this;
     }
 
     @Step("Price should be {price}")
-    public void checkPrice(String price) {
+    public CartPage checkPrice(String price) {
         itemPrice.shouldHave(text(price));
+
+        return this;
     }
 
     @Step("Quantity should be {quantity}")
-    public void checkQuantity(String quantity) {
+    public CartPage quantityShouldBe(String quantity) {
         itemQuantity.shouldHave(text(quantity));
+
+        return this;
 
     }
 }

@@ -57,7 +57,7 @@ public class FinishTests extends TestBase {
         CartPage cartPage = open(DEFAULT_CART_PAGE, CartPage.class);
 
         cartPage.itemInCart(DEFAULT_ITEM);
-        cartPage.clear();
+        cartPage.cartClear();
     }
 
 }
