@@ -18,8 +18,8 @@ public class ShopTests extends TestBase {
 
     @BeforeAll
     static void login() {
-        LoginPage loginpage = open("/", LoginPage.class);
-        loginpage.login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
+        open("/", LoginPage.class)
+                .login(DEFAULT_LOGIN, DEFAULT_PASSWORD);
     }
 
     @BeforeEach
