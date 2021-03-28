@@ -51,7 +51,7 @@ public class CheckOutTests extends TestBase {
     void fillFormNoFirstName() {
         checkOutPage.fillForm("", DEFAULT_LASTNAME, DEFAULT_ZIP)
                 .unsuccessfulSubmitForm()
-                .checkError("Error: First Name is required");
+                .shouldHaveError("Error: First Name is required");
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CheckOutTests extends TestBase {
     void fillFormNoLastName() {
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, "", DEFAULT_ZIP)
                 .unsuccessfulSubmitForm()
-                .checkError("Error: Last Name is required");
+                .shouldHaveError("Error: Last Name is required");
     }
 
     @Test
@@ -67,7 +67,7 @@ public class CheckOutTests extends TestBase {
     void fillFormNoZipCode() {
         checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, "")
                 .unsuccessfulSubmitForm()
-                .checkError("Error: Postal Code is required");
+                .shouldHaveError("Error: Postal Code is required");
     }
 
     @Test

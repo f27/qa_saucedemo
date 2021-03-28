@@ -39,7 +39,7 @@ public class CheckOutPage extends StaticElements {
     }
 
     @Step("Page has error {errorMessage}")
-    public void checkError(String errorMessage) {
+    public void shouldHaveError(String errorMessage) {
         errorMess.shouldHave(text(errorMessage));
     }
 
