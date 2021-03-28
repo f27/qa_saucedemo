@@ -31,13 +31,17 @@ public class CartPage extends StaticElements {
     }
 
     @Step("Cart should have {item}")
-    public void cartShouldHave(String item) {
+    public CartPage cartShouldHave(String item) {
         cartList.shouldHave(text(item));
+
+        return this;
     }
 
     @Step("Cart should not have {item}")
-    public void cartShouldNotHave(String item) {
+    public CartPage cartShouldNotHave(String item) {
         cartList.shouldNotHave(text(item));
+
+        return this;
     }
 
     @Step("Click continue shopping")

@@ -14,7 +14,7 @@ import static tests.TestData.*;
 
 @DisplayName("Shop tests")
 public class ShopTests extends TestBase {
-    static ShopPage shopPage;
+    ShopPage shopPage;
 
     @BeforeAll
     static void login() {
@@ -30,14 +30,14 @@ public class ShopTests extends TestBase {
     @Test
     @DisplayName("Add and remove from cart")
     void addAndRemoveFromCartTest() {
-        shopPage.addToCart(DEFAULT_ITEM);
-        CartPage cartPage = shopPage.goToCart();
-        cartPage.cartShouldHave(DEFAULT_ITEM);
-        shopPage = cartPage.continueShopping();
-        shopPage.removeFromCart(DEFAULT_ITEM);
-        cartPage = shopPage.goToCart();
-        cartPage.cartShouldNotHave(DEFAULT_ITEM);
-        shopPage = cartPage.continueShopping();
+        shopPage.addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .cartShouldHave(DEFAULT_ITEM)
+                .continueShopping()
+                .removeFromCart(DEFAULT_ITEM)
+                .goToCart()
+                .cartShouldNotHave(DEFAULT_ITEM)
+                .continueShopping();
     }
 
     @Test
@@ -67,29 +67,29 @@ public class ShopTests extends TestBase {
     @Test
     @DisplayName("Testing sort A to Z")
     void sortAtoZTest() {
-        shopPage.sortAtoZ();
-        shopPage.assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
+        shopPage.sortAtoZ()
+                .assertSortAtoZ(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
     @DisplayName("Testing sort Z to A")
     void sortZtoATest() {
-        shopPage.sortZtoA();
-        shopPage.assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
+        shopPage.sortZtoA()
+                .assertSortZtoA(DEFAULT_A_ITEM, DEFAULT_Z_ITEM);
     }
 
     @Test
     @DisplayName("Testing sort low to high")
     void sortLowToHighTest() {
-        shopPage.sortLowToHigh();
-        shopPage.assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
+        shopPage.sortLowToHigh()
+                .assertSortLowToHigh(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
     @DisplayName("Testing sort high to low")
     void sortHighToLowTest() {
-        shopPage.sortHighToLow();
-        shopPage.assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
+        shopPage.sortHighToLow()
+                .assertSortHighToLow(DEFAULT_CHEAP_ITEM, DEFAULT_EXPENSIVE_ITEM);
     }
 
     @Test
