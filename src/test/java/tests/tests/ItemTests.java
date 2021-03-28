@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
-import tests.pages.CartPage;
 import tests.pages.ItemPage;
 import tests.pages.LoginPage;
 import tests.pages.ShopPage;
@@ -25,8 +24,8 @@ public class ItemTests extends TestBase {
 
     @BeforeEach
     void goToItemPage() {
-        ShopPage shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
-        itemPage = shopPage.goToItem(DEFAULT_ITEM);
+        itemPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class)
+                .goToItem(DEFAULT_ITEM);
     }
 
     @Test
@@ -62,8 +61,8 @@ public class ItemTests extends TestBase {
     @Test
     @DisplayName("Testing Back button")
     void backButtonTest() {
-        ShopPage shopPage = itemPage.goBack();
-        shopPage.checkPageLabel(DEFAULT_SHOP_LABEL);
+        itemPage.goBack()
+                .checkPageLabel(DEFAULT_SHOP_LABEL);
     }
 
     @Test
@@ -75,20 +74,14 @@ public class ItemTests extends TestBase {
     @Test
     @DisplayName("Testing add and remove from cart")
     void addAndRemoveFromCartTest() {
-        itemPage = new ItemPage();
-
-        itemPage.addToCart();
-        CartPage cartPage = itemPage.goToCart();
-
-        cartPage.cartShouldHave(DEFAULT_ITEM);
-        ShopPage shopPage = cartPage.continueShopping();
-
-        itemPage = shopPage.goToItem(DEFAULT_ITEM);
-
-        itemPage.removeFromCart();
-        cartPage = itemPage.goToCart();
-
-        cartPage.cartShouldNotHave(DEFAULT_ITEM);
-        cartPage.continueShopping();
+        itemPage.addToCart()
+                .goToCart()
+                .cartShouldHave(DEFAULT_ITEM)
+                .continueShopping()
+                .goToItem(DEFAULT_ITEM)
+                .removeFromCart()
+                .goToCart()
+                .cartShouldNotHave(DEFAULT_ITEM)
+                .continueShopping();
     }
 }

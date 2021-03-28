@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
-import tests.pages.CartPage;
 import tests.pages.LoginPage;
 import tests.pages.ShopPage;
 

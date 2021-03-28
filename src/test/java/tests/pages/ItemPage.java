@@ -49,18 +49,22 @@ public class ItemPage extends StaticElements {
     }
 
     @Step("Click on Add to cart")
-    public void addToCart() {
+    public ItemPage addToCart() {
         addAndRemoveButton.shouldHave(text("ADD TO CART"));
         addAndRemoveButton.click();
         addAndRemoveButton.shouldHave(text("REMOVE"));
         cartBadge.shouldBe(visible);
+
+        return this;
     }
 
     @Step("Click on Remove")
-    public void removeFromCart() {
+    public ItemPage removeFromCart() {
         addAndRemoveButton.shouldHave(text("REMOVE"));
         addAndRemoveButton.click();
         addAndRemoveButton.shouldHave(text("ADD TO CART"));
         cartBadge.shouldNotBe(visible);
+
+        return this;
     }
 }
