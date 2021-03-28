@@ -4,7 +4,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import tests.TestBase;
-import tests.pages.*;
+import tests.pages.CartPage;
+import tests.pages.FinishPage;
+import tests.pages.LoginPage;
+import tests.pages.ShopPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static tests.TestData.*;
@@ -22,42 +25,37 @@ public class FinishTests extends TestBase {
     @Test
     @DisplayName("Testing thanks page")
     void hasThanksTest() {
-        finishPage = open(DEFAULT_THANKS_PAGE, FinishPage.class);
-        finishPage.hasThanks();
+        open(DEFAULT_THANKS_PAGE, FinishPage.class)
+                .hasThanks();
     }
 
     @Test
     @DisplayName("Visit to thanks page should reset cart")
     void finishResetCartTest() {
-        ShopPage shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
-
-        shopPage.addToCart(DEFAULT_ITEM);
-        CartPage cartPage = shopPage.goToCart();
-        CheckOutPage checkOutPage = cartPage.checkOut();
-        checkOutPage.fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP);
-        OverviewPage overviewPage = checkOutPage.submitForm();
-        finishPage = overviewPage.finishClick();
-        finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
-        shopPage = finishPage.goToShop();
-        cartPage = shopPage.goToCart();
-        cartPage.isEmpty();
+        open(DEFAULT_INVENTORY_PAGE, ShopPage.class)
+                .addToCart(DEFAULT_ITEM)
+                .goToCart()
+                .checkOut()
+                .fillForm(DEFAULT_FIRSTNAME, DEFAULT_LASTNAME, DEFAULT_ZIP)
+                .submitForm()
+                .finishClick()
+                .goToShop()
+                .goToCart()
+                .isEmpty();
     }
 
     @Test
     @DisplayName("Direct visit to thanks page should not reset cart")
     void visitFinishNotResetCartTest() {
-        ShopPage shopPage = open(DEFAULT_INVENTORY_PAGE, ShopPage.class);
+        open(DEFAULT_INVENTORY_PAGE, ShopPage.class)
+                .addToCart(DEFAULT_ITEM);
 
-        shopPage.addToCart(DEFAULT_ITEM);
+        open(DEFAULT_THANKS_PAGE, FinishPage.class)
+                .checkSubHeader(DEFAULT_THANKS_LABEL);
 
-        finishPage = open(DEFAULT_THANKS_PAGE, FinishPage.class);
-
-        finishPage.checkSubHeader(DEFAULT_THANKS_LABEL);
-
-        CartPage cartPage = open(DEFAULT_CART_PAGE, CartPage.class);
-
-        cartPage.itemInCart(DEFAULT_ITEM);
-        cartPage.cartClear();
+        open(DEFAULT_CART_PAGE, CartPage.class)
+                .itemInCart(DEFAULT_ITEM)
+                .cartClear();
     }
 
 }

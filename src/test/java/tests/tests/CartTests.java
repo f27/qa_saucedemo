@@ -3,9 +3,7 @@ package tests.tests;
 import org.junit.jupiter.api.*;
 import tests.TestBase;
 import tests.pages.CartPage;
-import tests.pages.CheckOutPage;
 import tests.pages.LoginPage;
-import tests.pages.ShopPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static tests.TestData.*;
