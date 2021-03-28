@@ -26,27 +26,24 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Locked out")
     public void lockedOutLoginTest(){
-        loginpage = open("/", LoginPage.class);
-
-        loginpage.login(LOCKED_OUT_LOGIN, DEFAULT_PASSWORD);
-        loginpage.assertError(ERROR_LOGIN_LOCKED_OUT);
+        open("/", LoginPage.class)
+                .unsuccessfulLogin(LOCKED_OUT_LOGIN, DEFAULT_PASSWORD)
+                .shouldHaveError(ERROR_LOGIN_LOCKED_OUT);
     }
 
     @Test
     @DisplayName("Wrong login")
     public void wrongLoginTest(){
-        loginpage = open("/", LoginPage.class);
-
-        loginpage.login("wrongUser", DEFAULT_PASSWORD);
-        loginpage.assertError(ERROR_LOGIN_WRONG_PASSWORD);
+        open("/", LoginPage.class)
+                .unsuccessfulLogin("wrongUser", DEFAULT_PASSWORD)
+                .shouldHaveError(ERROR_LOGIN_WRONG_PASSWORD);
     }
 
     @Test
     @DisplayName("Wrong password")
     public void wrongPasswordTest(){
-        loginpage = open("/", LoginPage.class);
-
-        loginpage.login(DEFAULT_LOGIN, "wrongPass");
-        loginpage.assertError(ERROR_LOGIN_WRONG_PASSWORD);
+        open("/", LoginPage.class)
+                .unsuccessfulLogin(DEFAULT_LOGIN, "wrongPass")
+                .shouldHaveError(ERROR_LOGIN_WRONG_PASSWORD);
     }
 }

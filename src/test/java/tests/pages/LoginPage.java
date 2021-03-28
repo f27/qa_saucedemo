@@ -21,8 +21,16 @@ public class LoginPage {
         return page(ShopPage.class);
     }
 
+    @Step("Login: {username}, Password:{password}")
+    public LoginPage unsuccessfulLogin(String username, String password) {
+        usernameField.setValue(username);
+        passwordField.setValue(password).pressEnter();
+
+        return this;
+    }
+
     @Step("Error message should be: {errorMessage}")
-    public void assertError(String errorMessage) {
+    public void shouldHaveError(String errorMessage) {
         error.shouldHave(text(errorMessage));
     }
 }
